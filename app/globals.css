@@ -308,34 +308,34 @@ a {
   width: 100%;
   padding: 0.65rem 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #d4d0c8;
   background: #fff;
   cursor: pointer;
   font-weight: 600;
 }
 
 .login-submit {
-  background: var(--color-primary, #1e3a5f);
+  background: #101110;
   color: #fff;
-  border-color: transparent;
+  border-color: #101110;
 }
 
-.login-divider {
-  text-align: center;
-  margin: 1rem 0;
-  color: #888;
-  font-size: 0.8rem;
-}
-
-.login-form {
-  display: grid;
-  gap: 0.5rem;
+.login-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .login-form input {
   padding: 0.55rem 0.65rem;
-  border: 1px solid #ccc;
+  border: 1px solid #d4d0c8;
   border-radius: 6px;
+}
+
+#recaptcha-container {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .login-error {
@@ -348,10 +348,15 @@ a {
   margin-top: 0.75rem;
   background: none;
   border: none;
-  color: var(--color-primary, #1e3a5f);
+  color: #101110;
   cursor: pointer;
   font-size: 0.85rem;
   text-decoration: underline;
+}
+
+.login-form {
+  display: grid;
+  gap: 0.5rem;
 }
 
 .connect-page {
