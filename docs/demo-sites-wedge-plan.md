@@ -112,10 +112,15 @@ Do **not** reuse the four existing dev app domains (`dev.valetfy.com`, etc.).
 
 ## Vercel setup (operator)
 
-1. Import GitHub repo `utb2017/valetfy-demo-sites` → project name **`valetfy-demo-sites`**
-2. Env vars (from `valetfy` dev preview): all `FIREBASE_ADMIN_*`, optional `NEXT_PUBLIC_FIREBASE_*` for future client auth
-3. Domains: add `dev.sites.valetfy.com` and wildcard `*.dev.sites.valetfy.com` (Vercel DNS or Porkbun CNAME to `cname.vercel-dns.com`)
-4. Deploy `main`
+1. Import GitHub repo `utb2017/valetfy-demo-sites` → project name **`valetfy-demo-sites`** ✅
+2. Env vars (from `valetfy` dev preview): `FIREBASE_ADMIN_*`, `DEMO_SITES_BASE_DOMAIN` ✅
+3. Domains: add `dev.sites.valetfy.com` and wildcard `*.dev.sites.valetfy.com` ✅ (added to Vercel)
+4. **DNS (pending):** at `valetfy.com` registrar, add:
+   - `A` `dev.sites` → `76.76.21.21`
+   - `A` `*.dev.sites` → `76.76.21.21`
+5. Deploy `main` ✅ → https://valetfy-demo-sites.vercel.app
+
+Until DNS propagates, test locally: `http://scott.localhost:3000` or production server with `Host: scott.localhost`.
 
 ---
 
