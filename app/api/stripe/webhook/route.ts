@@ -6,6 +6,7 @@ import {
   updateDemoSiteFromSubscription,
 } from "@/lib/demoSiteSubscription";
 import { assertStripeTestMode, getStripe, getWebhookSecret } from "@/lib/stripe";
+import { sendWelcomeEmailForClaim } from "@/lib/welcomeEmail";
 
 export const runtime = "nodejs";
 
@@ -38,6 +39,15 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     dnsRevealUnlocked: true,
     status: "sold",
   });
+
+  try {
+    await sendWelcomeEmailForClaim({
+      siteId,
+      customerEmail: session.customer_details?.email ?? session.customer_email,
+    });
+  } catch (err) {
+    console.error("Welcome email failed:", err);
+  }
 }
 
 async function handleSubscriptionChange(sub: Stripe.Subscription) {

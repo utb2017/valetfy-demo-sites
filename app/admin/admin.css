@@ -158,3 +158,57 @@
   padding: 2rem;
   text-align: center;
 }
+
+.admin-outreach {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.admin-leads-btn {
+  background: none;
+  border: none;
+  color: #1e3a5f;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.admin-leads-panel {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.admin-leads-panel h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.admin-leads-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-leads-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-leads-list li:last-child {
+  border-bottom: none;
+}
+
+.admin-leads-date {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.admin-leads-msg {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: #444;
+}

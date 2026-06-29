@@ -19,7 +19,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       email: "hello@scotthomeservices.example",
       phone: "(805) 555-0142",
     },
-    sourceUrl: "https://scotthomeservices.com",
+    sourceUrl: "https://scottsmobilegrooming.com",
     status: "demo",
     generatedPages: ["home"],
     theme: {
@@ -89,7 +89,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       email: "book@woofwash.example",
       phone: "(805) 555-0198",
     },
-    sourceUrl: "https://woofwashmobile.com",
+    sourceUrl: "https://woofwash.com",
     status: "demo",
     generatedPages: ["home"],
     theme: {

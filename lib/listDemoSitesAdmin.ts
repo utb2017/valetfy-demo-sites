@@ -1,11 +1,19 @@
+import type { DemoSiteLeadDoc } from "@/lib/demoSiteTypes";
 import type { DemoSiteDoc, DemoSitePublic } from "@/lib/demoSiteTypes";
 import { normalizeDemoSiteStats } from "@/lib/demoSiteStats";
+import { listRecentLeadsForSite, type LeadRow } from "@/lib/leadsStore";
 import { FieldValue, assertDevFirebaseProject, getAdminDb } from "@/lib/firebaseAdmin";
 
-export type AdminDemoSiteRow = DemoSitePublic & {
+export type AdminDemoSiteRow = Omit<
+  DemoSitePublic,
+  "outreachSentAt" | "welcomeEmailSentAt"
+> & {
   stats: ReturnType<typeof normalizeDemoSiteStats>;
   createdAt: string | null;
   updatedAt: string | null;
+  outreachStatus: string | null;
+  outreachSentAt: string | null;
+  recentLeads: LeadRow[];
 };
 
 function tsToIso(v: unknown): string | null {
@@ -19,7 +27,8 @@ function tsToIso(v: unknown): string | null {
 
 function toAdminRow(
   siteId: string,
-  data: FirebaseFirestore.DocumentData
+  data: FirebaseFirestore.DocumentData,
+  recentLeads: LeadRow[]
 ): AdminDemoSiteRow {
   const doc = data as DemoSiteDoc;
   return {
@@ -41,6 +50,9 @@ function toAdminRow(
     stripeSubscriptionId: doc.stripeSubscriptionId ?? null,
     dnsRevealUnlocked: Boolean(doc.dnsRevealUnlocked),
     stats: normalizeDemoSiteStats(doc.stats),
+    outreachStatus: doc.outreachStatus ?? null,
+    outreachSentAt: tsToIso(doc.outreachSentAt),
+    recentLeads,
     createdAt: tsToIso(data.createdAt),
     updatedAt: tsToIso(data.updatedAt),
   };
@@ -50,9 +62,15 @@ export async function listAllDemoSitesAdmin(): Promise<AdminDemoSiteRow[]> {
   assertDevFirebaseProject();
   const db = getAdminDb();
   const snap = await db.collection("demoSites").get();
-  return snap.docs
-    .map((d) => toAdminRow(d.id, d.data()))
-    .sort((a, b) => (b.createdAt ?? "").localeCompare(a.createdAt ?? ""));
+
+  const rows = await Promise.all(
+    snap.docs.map(async (d) => {
+      const recentLeads = await listRecentLeadsForSite(d.id, 5);
+      return toAdminRow(d.id, d.data(), recentLeads);
+    })
+  );
+
+  return rows.sort((a, b) => (b.createdAt ?? "").localeCompare(a.createdAt ?? ""));
 }
 
 export async function updateDemoSiteStatusAdmin(
@@ -66,3 +84,5 @@ export async function updateDemoSiteStatusAdmin(
     .doc(siteId)
     .set({ status, updatedAt: FieldValue.serverTimestamp() }, { merge: true });
 }
+
+export type { DemoSiteLeadDoc };

@@ -72,6 +72,18 @@ export type DemoSiteStats = {
   claim: number;
   text: number;
   call: number;
+  leads: number;
+};
+
+export type DemoSiteOutreachStatus = "none" | "sent" | "failed";
+
+export type DemoSiteLeadDoc = {
+  name: string;
+  email: string;
+  phone?: string | null;
+  message: string;
+  sourceSiteId: string;
+  createdAt?: FirebaseFirestore.Timestamp;
 };
 
 export type DemoSiteDoc = {
@@ -94,6 +106,10 @@ export type DemoSiteDoc = {
   stripeSubscriptionId?: string | null;
   dnsRevealUnlocked: boolean;
   stats?: DemoSiteStats;
+  /** Admin outreach email tracking. */
+  outreachStatus?: DemoSiteOutreachStatus | null;
+  outreachSentAt?: FirebaseFirestore.Timestamp;
+  welcomeEmailSentAt?: FirebaseFirestore.Timestamp;
   createdAt?: FirebaseFirestore.Timestamp;
   updatedAt?: FirebaseFirestore.Timestamp;
 };

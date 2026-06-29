@@ -1,7 +1,7 @@
 import { SEED_TENANTS } from "./seedData";
-import { REGISTRAR_LOOKUP_DOMAINS } from "./registrarLookupConfig";
 import { assertDevFirebaseProject, FieldValue, getAdminDb } from "../lib/firebaseAdmin";
 import { detectRegistrarForDomain } from "../lib/detectRegistrar";
+import { domainFromSourceUrl } from "../lib/sourceUrl";
 
 async function main() {
   const projectId = assertDevFirebaseProject();
@@ -12,14 +12,10 @@ async function main() {
   for (const tenant of SEED_TENANTS) {
     const { siteId, sourceUrl, ...rest } = tenant;
     let registrar: string | null = null;
-    const lookupDomain =
-      REGISTRAR_LOOKUP_DOMAINS[siteId] ??
-      sourceUrl?.replace(/^https?:\/\//, "").split("/")[0];
+    const lookupDomain = domainFromSourceUrl(sourceUrl);
 
-    if (lookupDomain && !lookupDomain.endsWith(".example")) {
-      const lookupUrl = lookupDomain.startsWith("http")
-        ? lookupDomain
-        : `https://${lookupDomain}`;
+    if (lookupDomain) {
+      const lookupUrl = `https://${lookupDomain}`;
       process.stdout.write(`RDAP lookup for ${lookupUrl}… `);
       registrar = await detectRegistrarForDomain(lookupUrl);
       console.log(registrar ?? "(none)");

@@ -516,3 +516,59 @@ a {
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
+
+.lead-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.lead-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.lead-form input,
+.lead-form textarea {
+  font: inherit;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.lead-form-submit {
+  border: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.lead-form-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.lead-optional {
+  font-weight: 400;
+  color: #666;
+}
+
+.lead-form-error {
+  color: #b00020;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.lead-form-success {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #e8f5e9;
+  border-radius: 8px;
+  color: #1b5e20;
+}

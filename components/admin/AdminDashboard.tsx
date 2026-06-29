@@ -40,6 +40,10 @@ export function AdminDashboard() {
   const [data, setData] = useState<AdminPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [outreachBusy, setOutreachBusy] = useState<string | null>(null);
+  const [selectedLeadsSiteId, setSelectedLeadsSiteId] = useState<string | null>(
+    null
+  );
 
   const load = useCallback(async () => {
     setBusy(true);
@@ -86,6 +90,33 @@ export function AdminDashboard() {
 
   async function copyUrl(url: string) {
     await navigator.clipboard.writeText(url);
+  }
+
+  async function sendOutreach(siteId: string) {
+    const token = await getIdToken();
+    if (!token) return;
+    setOutreachBusy(siteId);
+    try {
+      const res = await fetch(`/api/admin/sites/${siteId}/outreach`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? "Send failed");
+      void load();
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Outreach send failed");
+    } finally {
+      setOutreachBusy(null);
+    }
+  }
+
+  function formatOutreach(site: AdminDemoSiteRow) {
+    if (site.outreachStatus === "sent" && site.outreachSentAt) {
+      return `Sent ${new Date(site.outreachSentAt).toLocaleDateString()}`;
+    }
+    if (site.outreachStatus === "failed") return "Failed";
+    return "—";
   }
 
   if (loading) {
@@ -163,6 +194,8 @@ export function AdminDashboard() {
                   <th>Unlock</th>
                   <th>Owner UID</th>
                   <th>Created</th>
+                  <th>Outreach</th>
+                  <th>Leads</th>
                   <th>Stats</th>
                   <th>Actions</th>
                 </tr>
@@ -209,6 +242,22 @@ export function AdminDashboard() {
                         ? new Date(site.createdAt).toLocaleDateString()
                         : "—"}
                     </td>
+                    <td className="admin-outreach">{formatOutreach(site)}</td>
+                    <td className="admin-leads">
+                      <button
+                        type="button"
+                        className="admin-leads-btn"
+                        onClick={() =>
+                          setSelectedLeadsSiteId(
+                            selectedLeadsSiteId === site.siteId
+                              ? null
+                              : site.siteId
+                          )
+                        }
+                      >
+                        {site.stats.leads} lead{site.stats.leads === 1 ? "" : "s"}
+                      </button>
+                    </td>
                     <td className="admin-stats">
                       <span title="views">{site.stats.views}v</span>{" "}
                       <span title="book">{site.stats.book}b</span>{" "}
@@ -233,12 +282,54 @@ export function AdminDashboard() {
                       >
                         Copy URL
                       </button>
+                      <button
+                        type="button"
+                        disabled={outreachBusy === site.siteId}
+                        onClick={() => void sendOutreach(site.siteId)}
+                      >
+                        {outreachBusy === site.siteId
+                          ? "Sending…"
+                          : "Send outreach"}
+                      </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {selectedLeadsSiteId ? (
+            <div className="admin-leads-panel">
+              <h3>
+                Recent leads —{" "}
+                {sites.find((s) => s.siteId === selectedLeadsSiteId)
+                  ?.businessName ?? selectedLeadsSiteId}
+              </h3>
+              {(() => {
+                const site = sites.find((s) => s.siteId === selectedLeadsSiteId);
+                if (!site?.recentLeads.length) {
+                  return <p>No leads yet.</p>;
+                }
+                return (
+                  <ul className="admin-leads-list">
+                    {site.recentLeads.map((lead) => (
+                      <li key={lead.leadId}>
+                        <strong>{lead.name}</strong> · {lead.email}
+                        {lead.phone ? ` · ${lead.phone}` : ""}
+                        {lead.createdAt ? (
+                          <span className="admin-leads-date">
+                            {" "}
+                            — {new Date(lead.createdAt).toLocaleString()}
+                          </span>
+                        ) : null}
+                        <p className="admin-leads-msg">{lead.message}</p>
+                      </li>
+                    ))}
+                  </ul>
+                );
+              })()}
+            </div>
+          ) : null}
         </div>
       ) : (
         <div className="container admin-panel">
