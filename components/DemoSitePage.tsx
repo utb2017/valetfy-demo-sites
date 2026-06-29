@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { ClaimBar } from "@/components/ClaimBar";
 import { PoweredByValetfy } from "@/components/PoweredByValetfy";
+import { PageViewTracker } from "@/components/analytics/trackDemoSiteEvent";
 import { getDemoSiteBySlug } from "@/lib/getDemoSite";
 import type { DemoSitePublic } from "@/lib/demoSiteTypes";
 import { getClaimPriceUsd } from "@/lib/stripe";
@@ -29,6 +30,7 @@ export function DemoSitePage({ site }: Props) {
         } as React.CSSProperties
       }
     >
+      <PageViewTracker siteId={site.siteId} />
       <header className="site-header">
         <div className="container header-inner">
           {site.theme.logoUrl ? (
@@ -40,7 +42,11 @@ export function DemoSitePage({ site }: Props) {
       </header>
 
       <main>
-        <BlockRenderer blocks={site.contentBlocks} theme={site.theme} />
+        <BlockRenderer
+          siteId={site.siteId}
+          blocks={site.contentBlocks}
+          theme={site.theme}
+        />
       </main>
 
       <PoweredByValetfy enabled={site.backlinkEnabled} />

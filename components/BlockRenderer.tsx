@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/blocks/HeroSection";
 import { ServicesSection } from "@/components/blocks/ServicesSection";
 
 type Props = {
+  siteId: string;
   blocks: ContentBlock[];
   theme: {
     primaryColor: string;
@@ -13,14 +14,19 @@ type Props = {
   };
 };
 
-export function BlockRenderer({ blocks, theme }: Props) {
+export function BlockRenderer({ siteId, blocks, theme }: Props) {
   return (
     <>
       {blocks.map((block, index) => {
         switch (block.type) {
           case "hero":
             return (
-              <HeroSection key={`hero-${index}`} block={block} theme={theme} />
+              <HeroSection
+                key={`hero-${index}`}
+                siteId={siteId}
+                block={block}
+                theme={theme}
+              />
             );
           case "about":
             return (
@@ -38,6 +44,7 @@ export function BlockRenderer({ blocks, theme }: Props) {
             return (
               <ContactSection
                 key={`contact-${index}`}
+                siteId={siteId}
                 block={block}
                 theme={theme}
               />

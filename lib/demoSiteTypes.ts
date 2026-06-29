@@ -66,6 +66,14 @@ export type DemoSiteSubscriptionStatus =
   | "canceled"
   | "incomplete";
 
+export type DemoSiteStats = {
+  views: number;
+  book: number;
+  claim: number;
+  text: number;
+  call: number;
+};
+
 export type DemoSiteDoc = {
   businessName: string;
   slug: string;
@@ -85,6 +93,7 @@ export type DemoSiteDoc = {
   stripeCustomerId?: string | null;
   stripeSubscriptionId?: string | null;
   dnsRevealUnlocked: boolean;
+  stats?: DemoSiteStats;
   createdAt?: FirebaseFirestore.Timestamp;
   updatedAt?: FirebaseFirestore.Timestamp;
 };

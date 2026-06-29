@@ -1,10 +1,15 @@
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { renderDemoSiteForSlug } from "@/components/DemoSitePage";
 import { resolveSiteIdFromRequest } from "@/lib/resolveSiteFromRequest";
 
 export default async function HomePage() {
   const siteId = await resolveSiteIdFromRequest();
+
+  if (siteId === "admin") {
+    redirect("/admin");
+  }
 
   if (!siteId) {
     return (

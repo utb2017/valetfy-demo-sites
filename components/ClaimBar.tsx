@@ -7,6 +7,7 @@ import { LoginPanel } from "@/components/auth/LoginPanel";
 import { useAuth } from "@/components/auth/AuthProvider";
 import type { DemoSitePublic } from "@/lib/demoSiteTypes";
 import { subscriptionIsActive } from "@/lib/subscriptionUtils";
+import { trackDemoSiteEvent } from "@/components/analytics/trackDemoSiteEvent";
 
 type Props = {
   site: DemoSitePublic;
@@ -64,6 +65,7 @@ export function ClaimBar({ site, priceUsd }: Props) {
   }
 
   function handleClaimClick() {
+    trackDemoSiteEvent(site.siteId, "claim");
     if (!user) {
       setShowLogin(true);
       return;

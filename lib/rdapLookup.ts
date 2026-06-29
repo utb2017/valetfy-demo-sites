@@ -80,11 +80,25 @@ export async function lookupRegistrar(sourceUrl: string): Promise<string | null>
 export async function lookupRegistrarWithFallback(
   sourceUrl: string
 ): Promise<string | null> {
+  const domain = extractDomain(sourceUrl);
+  if (!domain) return null;
+
   const primary = await lookupRegistrar(sourceUrl);
   if (primary) return primary;
 
-  const domain = extractDomain(sourceUrl);
-  if (!domain) return null;
+  try {
+    const res = await fetch(
+      `https://rdap.cloudflare.com/rdap/v1/domain/${domain}`,
+      { headers: { Accept: "application/rdap+json" } }
+    );
+    if (res.ok) {
+      const data = (await res.json()) as RdapResponse;
+      const fromCf = registrarFromEntities(data.entities);
+      if (fromCf) return fromCf;
+    }
+  } catch {
+    /* try verisign next */
+  }
 
   try {
     const res = await fetch(`https://rdap.verisign.com/com/v1/domain/${domain}`, {

@@ -1,6 +1,7 @@
 import { SEED_TENANTS } from "./seedData";
+import { REGISTRAR_LOOKUP_DOMAINS } from "./registrarLookupConfig";
 import { assertDevFirebaseProject, FieldValue, getAdminDb } from "../lib/firebaseAdmin";
-import { lookupRegistrarWithFallback } from "../lib/rdapLookup";
+import { detectRegistrarForDomain } from "../lib/detectRegistrar";
 
 async function main() {
   const projectId = assertDevFirebaseProject();
@@ -11,17 +12,22 @@ async function main() {
   for (const tenant of SEED_TENANTS) {
     const { siteId, sourceUrl, ...rest } = tenant;
     let registrar: string | null = null;
+    const lookupDomain =
+      REGISTRAR_LOOKUP_DOMAINS[siteId] ??
+      sourceUrl?.replace(/^https?:\/\//, "").split("/")[0];
 
-    if (sourceUrl) {
-      process.stdout.write(`RDAP lookup for ${sourceUrl}… `);
-      registrar = await lookupRegistrarWithFallback(sourceUrl);
+    if (lookupDomain && !lookupDomain.endsWith(".example")) {
+      const lookupUrl = lookupDomain.startsWith("http")
+        ? lookupDomain
+        : `https://${lookupDomain}`;
+      process.stdout.write(`RDAP lookup for ${lookupUrl}… `);
+      registrar = await detectRegistrarForDomain(lookupUrl);
       console.log(registrar ?? "(none)");
     }
 
-    const doc = {
+    const doc: Record<string, unknown> = {
       ...rest,
       sourceUrl: sourceUrl ?? null,
-      registrar: registrar ?? tenant.registrar ?? null,
       ownerUid: null,
       subscriptionStatus: null,
       stripeCustomerId: null,
@@ -31,6 +37,10 @@ async function main() {
       status: "demo",
       updatedAt: FieldValue.serverTimestamp(),
     };
+
+    if (registrar) {
+      doc.registrar = registrar;
+    }
 
     const ref = db.collection("demoSites").doc(siteId);
     const existing = await ref.get();

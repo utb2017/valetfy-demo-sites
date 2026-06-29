@@ -10,10 +10,11 @@
     "seed": "tsx --env-file=.env.local scripts/seedDemoSites.ts",
     "stripe:setup": "tsx --env-file=.env.local scripts/setupStripeProduct.ts",
     "stripe:webhook-setup": "tsx --env-file=.env.local scripts/setupStripeWebhook.ts",
-    "smoke:claim": "tsx --env-file=.env.local scripts/smokeClaimFlow.ts",
+    "registrars:refresh": "tsx --env-file=.env.local scripts/refreshRegistrars.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "firebase": "^12.15.0",
     "firebase-admin": "^13.6.0",
     "next": "^15.5.0",

@@ -19,8 +19,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       email: "hello@scotthomeservices.example",
       phone: "(805) 555-0142",
     },
-    sourceUrl: "https://scotthomeservices.example",
-    registrar: "GoDaddy.com, LLC",
+    sourceUrl: "https://scotthomeservices.com",
     status: "demo",
     generatedPages: ["home"],
     theme: {
@@ -90,8 +89,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       email: "book@woofwash.example",
       phone: "(805) 555-0198",
     },
-    sourceUrl: "https://woofwash.example",
-    registrar: "Cloudflare, Inc.",
+    sourceUrl: "https://woofwashmobile.com",
     status: "demo",
     generatedPages: ["home"],
     theme: {
