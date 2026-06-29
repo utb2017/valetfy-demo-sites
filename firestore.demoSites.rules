@@ -1,0 +1,13 @@
+rules_version = '2';
+// demoSites — deploy to valetfy-main-dev only (Phase 1: server reads via Admin SDK).
+// Phase 3 may open client reads for authenticated owners.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /demoSites/{siteId} {
+      // Public read for rendered demo pages if client SDK is added later.
+      allow read: if resource.data.status in ['demo', 'live'];
+      allow write: if false;
+    }
+  }
+}
