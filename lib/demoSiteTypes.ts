@@ -3,7 +3,10 @@ export type DemoSiteStatus =
   | "demo"
   | "live"
   | "sold"
+  | "gifted"
   | "archived";
+
+export type DemoSiteMonetization = "paid" | "gift";
 
 export type DemoSiteContact = {
   name?: string;
@@ -105,6 +108,10 @@ export type DemoSiteDoc = {
   stripeCustomerId?: string | null;
   stripeSubscriptionId?: string | null;
   dnsRevealUnlocked: boolean;
+  /** paid = Stripe subscription; gift = free courtesy claim (no Stripe). */
+  monetization?: DemoSiteMonetization;
+  /** Per-site price override (USD/mo); defaults to DEMO_SITES_CLAIM_PRICE_USD. */
+  priceUsd?: number | null;
   stats?: DemoSiteStats;
   /** Admin outreach email tracking. */
   outreachStatus?: DemoSiteOutreachStatus | null;

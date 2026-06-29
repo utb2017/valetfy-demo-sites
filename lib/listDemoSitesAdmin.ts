@@ -1,6 +1,7 @@
 import type { DemoSiteLeadDoc } from "@/lib/demoSiteTypes";
 import type { DemoSiteDoc, DemoSitePublic } from "@/lib/demoSiteTypes";
 import { normalizeDemoSiteStats } from "@/lib/demoSiteStats";
+import { getEffectivePriceUsd } from "@/lib/monetization";
 import { listRecentLeadsForSite, type LeadRow } from "@/lib/leadsStore";
 import { FieldValue, assertDevFirebaseProject, getAdminDb } from "@/lib/firebaseAdmin";
 
@@ -13,6 +14,7 @@ export type AdminDemoSiteRow = Omit<
   updatedAt: string | null;
   outreachStatus: string | null;
   outreachSentAt: string | null;
+  effectivePriceUsd: number;
   recentLeads: LeadRow[];
 };
 
@@ -49,6 +51,12 @@ function toAdminRow(
     stripeCustomerId: doc.stripeCustomerId ?? null,
     stripeSubscriptionId: doc.stripeSubscriptionId ?? null,
     dnsRevealUnlocked: Boolean(doc.dnsRevealUnlocked),
+    monetization: doc.monetization === "gift" ? "gift" : "paid",
+    priceUsd:
+      typeof doc.priceUsd === "number" && doc.priceUsd > 0
+        ? doc.priceUsd
+        : null,
+    effectivePriceUsd: getEffectivePriceUsd(doc),
     stats: normalizeDemoSiteStats(doc.stats),
     outreachStatus: doc.outreachStatus ?? null,
     outreachSentAt: tsToIso(doc.outreachSentAt),

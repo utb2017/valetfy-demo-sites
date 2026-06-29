@@ -79,6 +79,7 @@ export const SEED_TENANTS: SeedTenant[] = [
     stripeCustomerId: null,
     stripeSubscriptionId: null,
     dnsRevealUnlocked: false,
+    monetization: "gift",
   },
   {
     siteId: "woof-wash",
@@ -149,5 +150,6 @@ export const SEED_TENANTS: SeedTenant[] = [
     stripeCustomerId: null,
     stripeSubscriptionId: null,
     dnsRevealUnlocked: false,
+    monetization: "paid",
   },
 ];

@@ -40,8 +40,16 @@ export function getDemoSitesPriceId(): string {
 }
 
 export function getClaimPriceUsd(): number {
-  const n = Number(process.env.DEMO_SITES_CLAIM_PRICE_USD ?? "19");
-  return Number.isFinite(n) && n > 0 ? n : 19;
+  const n = Number(process.env.DEMO_SITES_CLAIM_PRICE_USD ?? "9.99");
+  return Number.isFinite(n) && n > 0 ? n : 9.99;
+}
+
+export function getDemoSitesProductId(): string {
+  const productId = safeStr(process.env.STRIPE_DEMO_SITES_PRODUCT_ID);
+  if (!productId) {
+    throw new Error("Missing STRIPE_DEMO_SITES_PRODUCT_ID");
+  }
+  return productId;
 }
 
 export function getWebhookSecret(): string {

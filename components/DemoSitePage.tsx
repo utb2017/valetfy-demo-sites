@@ -6,7 +6,6 @@ import { PoweredByValetfy } from "@/components/PoweredByValetfy";
 import { PageViewTracker } from "@/components/analytics/trackDemoSiteEvent";
 import { getDemoSiteBySlug } from "@/lib/getDemoSite";
 import type { DemoSitePublic } from "@/lib/demoSiteTypes";
-import { getClaimPriceUsd } from "@/lib/stripe";
 
 type Props = {
   site: DemoSitePublic;
@@ -50,7 +49,7 @@ export function DemoSitePage({ site }: Props) {
       </main>
 
       <PoweredByValetfy enabled={site.backlinkEnabled} />
-      <ClaimBar site={site} priceUsd={getClaimPriceUsd()} />
+      <ClaimBar site={site} />
     </div>
   );
 }

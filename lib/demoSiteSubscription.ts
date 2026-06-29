@@ -43,6 +43,20 @@ export async function setDemoSiteOwnerUid(siteId: string, ownerUid: string) {
     );
 }
 
+export async function claimGiftSite(siteId: string, ownerUid: string) {
+  const db = getAdminDb();
+  await db.collection("demoSites").doc(siteId).set(
+    {
+      ownerUid,
+      monetization: "gift",
+      dnsRevealUnlocked: true,
+      status: "gifted",
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+}
+
 export async function setDemoSiteCustomDomain(
   siteId: string,
   customDomain: string

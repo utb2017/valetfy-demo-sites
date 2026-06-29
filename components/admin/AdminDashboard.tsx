@@ -25,6 +25,7 @@ const STATUSES: DemoSiteStatus[] = [
   "demo",
   "live",
   "sold",
+  "gifted",
   "archived",
 ];
 
@@ -189,6 +190,8 @@ export function AdminDashboard() {
                   <th>Business</th>
                   <th>Slug</th>
                   <th>Status</th>
+                  <th>Monetization</th>
+                  <th>Price</th>
                   <th>Registrar</th>
                   <th>Domain</th>
                   <th>Unlock</th>
@@ -224,6 +227,12 @@ export function AdminDashboard() {
                           </option>
                         ))}
                       </select>
+                    </td>
+                    <td>{site.monetization ?? "paid"}</td>
+                    <td>
+                      {site.monetization === "gift"
+                        ? "Free"
+                        : `$${site.effectivePriceUsd.toFixed(2)}/mo`}
                     </td>
                     <td>{site.registrar ?? "—"}</td>
                     <td>{site.customDomain ?? "—"}</td>
@@ -338,7 +347,7 @@ export function AdminDashboard() {
               <span className="admin-metric-label">MRR (test)</span>
               <strong>${subs?.mrrUsd ?? 0}</strong>
               <span className="admin-metric-note">
-                {subs?.activeCount ?? 0} active × ${subs?.priceUsd ?? 19}/mo
+                {subs?.activeCount ?? 0} paid active (gifts excluded)
               </span>
             </div>
             <div className="admin-metric">

@@ -30,6 +30,11 @@ function asDemoSitePublic(
     stripeCustomerId: data.stripeCustomerId ?? null,
     stripeSubscriptionId: data.stripeSubscriptionId ?? null,
     dnsRevealUnlocked: Boolean(data.dnsRevealUnlocked),
+    monetization: data.monetization === "gift" ? "gift" : "paid",
+    priceUsd:
+      typeof data.priceUsd === "number" && data.priceUsd > 0
+        ? data.priceUsd
+        : null,
   };
 }
 

@@ -224,9 +224,11 @@ export function ConnectPageClient({ site }: Props) {
         </section>
 
         <section className="connect-card connect-manage">
-          <button type="button" onClick={openPortal} className="portal-btn">
-            Manage subscription / cancel
-          </button>
+          {site.monetization !== "gift" ? (
+            <button type="button" onClick={openPortal} className="portal-btn">
+              Manage subscription / cancel
+            </button>
+          ) : null}
           <Link href="/" className="connect-back">
             ← Back to site preview
           </Link>
