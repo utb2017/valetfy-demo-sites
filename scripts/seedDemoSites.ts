@@ -21,7 +21,14 @@ async function main() {
     const doc = {
       ...rest,
       sourceUrl: sourceUrl ?? null,
-      registrar,
+      registrar: registrar ?? tenant.registrar ?? null,
+      ownerUid: null,
+      subscriptionStatus: null,
+      stripeCustomerId: null,
+      stripeSubscriptionId: null,
+      dnsRevealUnlocked: false,
+      customDomain: null,
+      status: "demo",
       updatedAt: FieldValue.serverTimestamp(),
     };
 

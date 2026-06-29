@@ -8,13 +8,18 @@
     "start": "next start",
     "lint": "eslint .",
     "seed": "tsx --env-file=.env.local scripts/seedDemoSites.ts",
+    "stripe:setup": "tsx --env-file=.env.local scripts/setupStripeProduct.ts",
+    "stripe:webhook-setup": "tsx --env-file=.env.local scripts/setupStripeWebhook.ts",
+    "smoke:claim": "tsx --env-file=.env.local scripts/smokeClaimFlow.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "firebase": "^12.15.0",
     "firebase-admin": "^13.6.0",
     "next": "^15.5.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "stripe": "^22.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

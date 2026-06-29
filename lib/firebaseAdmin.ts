@@ -57,11 +57,14 @@ function ensureApp(): admin.app.App {
   });
 }
 
+let _db: FirebaseFirestore.Firestore | null = null;
+
 export function getAdminDb(): FirebaseFirestore.Firestore {
+  if (_db) return _db;
   const app = ensureApp();
-  const db = admin.firestore(app);
-  db.settings({ ignoreUndefinedProperties: true });
-  return db;
+  _db = admin.firestore(app);
+  _db.settings({ ignoreUndefinedProperties: true });
+  return _db;
 }
 
 export const FieldValue = admin.firestore.FieldValue;

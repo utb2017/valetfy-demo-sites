@@ -59,18 +59,29 @@ export type ContentBlock =
   | ServicesBlock
   | ContactBlock;
 
+export type DemoSiteSubscriptionStatus =
+  | "none"
+  | "active"
+  | "past_due"
+  | "canceled"
+  | "incomplete";
+
 export type DemoSiteDoc = {
   businessName: string;
   slug: string;
   owner?: DemoSiteContact;
+  /** Firebase Auth uid of the claiming Valetfy account. */
+  ownerUid?: string | null;
   sourceUrl?: string;
-  registrar?: string;
+  registrar?: string | null;
+  /** Customer's custom domain after unlock (e.g. scotthomeservices.com). */
+  customDomain?: string | null;
   status: DemoSiteStatus;
   generatedPages: string[];
   theme: DemoSiteTheme;
   contentBlocks: ContentBlock[];
   backlinkEnabled: boolean;
-  subscriptionStatus?: string | null;
+  subscriptionStatus?: DemoSiteSubscriptionStatus | string | null;
   stripeCustomerId?: string | null;
   stripeSubscriptionId?: string | null;
   dnsRevealUnlocked: boolean;

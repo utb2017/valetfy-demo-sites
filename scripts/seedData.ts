@@ -6,6 +6,7 @@ export type SeedTenant = Omit<
 > & {
   siteId: string;
   sourceUrl?: string;
+  registrar?: string;
 };
 
 export const SEED_TENANTS: SeedTenant[] = [
@@ -19,6 +20,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       phone: "(805) 555-0142",
     },
     sourceUrl: "https://scotthomeservices.example",
+    registrar: "GoDaddy.com, LLC",
     status: "demo",
     generatedPages: ["home"],
     theme: {
@@ -89,6 +91,7 @@ export const SEED_TENANTS: SeedTenant[] = [
       phone: "(805) 555-0198",
     },
     sourceUrl: "https://woofwash.example",
+    registrar: "Cloudflare, Inc.",
     status: "demo",
     generatedPages: ["home"],
     theme: {

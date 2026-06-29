@@ -1,19 +1,12 @@
 import { headers } from "next/headers";
 
 import { renderDemoSiteForSlug } from "@/components/DemoSitePage";
-import {
-  resolveDevFallbackSlug,
-  resolveSlugFromHost,
-} from "@/lib/resolveTenantFromHost";
+import { resolveSiteIdFromRequest } from "@/lib/resolveSiteFromRequest";
 
 export default async function HomePage() {
-  const headerStore = await headers();
-  const slug =
-    headerStore.get("x-demo-site-slug") ??
-    resolveSlugFromHost(headerStore.get("host")) ??
-    resolveDevFallbackSlug();
+  const siteId = await resolveSiteIdFromRequest();
 
-  if (!slug) {
+  if (!siteId) {
     return (
       <main className="landing-fallback">
         <div className="container">
@@ -27,5 +20,5 @@ export default async function HomePage() {
     );
   }
 
-  return renderDemoSiteForSlug(slug);
+  return renderDemoSiteForSlug(siteId);
 }
