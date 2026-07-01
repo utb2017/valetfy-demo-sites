@@ -152,4 +152,75 @@ export const SEED_TENANTS: SeedTenant[] = [
     dnsRevealUnlocked: false,
     monetization: "paid",
   },
+  {
+    siteId: "lotus-pet-spa-mobile",
+    businessName: "Lotus Pet Spa Mobile Grooming",
+    slug: "lotus-pet-spa-mobile",
+    owner: {
+      name: "April",
+      email: "book@lotuspetspamobile.com",
+      phone: "(706) 801-6787",
+    },
+    sourceUrl: "https://lotuspetspamobile.com",
+    status: "demo",
+    generatedPages: ["home"],
+    theme: {
+      primaryColor: "#5B4B8A",
+      accentColor: "#7EBFB3",
+      backgroundColor: "#F7F5FA",
+      fontFamily: "sans",
+    },
+    contentBlocks: [
+      {
+        type: "hero",
+        headline: "Luxury mobile grooming — relaxing paw zen at your door",
+        subheadline:
+          "One-on-one spa care from an internationally certified master groomer. Columbus, GA & Muscogee County.",
+        ctaLabel: "Book on MoeGo",
+        ctaHref: "https://booking.moego.pet/ol/LotusPetSpaMobileGroomingLLC/book",
+        imageUrl:
+          "https://images.unsplash.com/photo-1516738901171-8eb4ec13bd37?w=1200&q=80",
+      },
+      {
+        type: "about",
+        title: "About April & Lotus Pet Spa",
+        body: "April is an internationally certified master groomer and competition groomer behind Lotus Pet Spa Mobile Grooming, LLC — luxury mobile grooming with calm, personal attention for every dog.",
+      },
+      {
+        type: "services",
+        title: "Services",
+        items: [
+          {
+            name: "Full Groom",
+            description: "Complete bath, trim, and finishing in our mobile spa van.",
+            price: "From $75+",
+          },
+          {
+            name: "Bath & Brush",
+            description: "Spa bath, blow dry, brush out, and nail care.",
+            price: "From $60+",
+          },
+          {
+            name: "Add-ons",
+            description: "Teeth brushing, paw pad moisturizer, and more.",
+            price: "Ask for quote",
+          },
+        ],
+      },
+      {
+        type: "contact",
+        title: "Book today",
+        phone: "(706) 801-6787",
+        email: "book@lotuspetspamobile.com",
+        address: "Mobile — Columbus, GA & Muscogee County",
+        hours: "By appointment",
+      },
+    ],
+    backlinkEnabled: true,
+    subscriptionStatus: null,
+    stripeCustomerId: null,
+    stripeSubscriptionId: null,
+    dnsRevealUnlocked: false,
+    monetization: "paid",
+  },
 ];
