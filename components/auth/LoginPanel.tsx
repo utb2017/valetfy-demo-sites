@@ -124,7 +124,7 @@ export function LoginPanel({ onClose }: Props) {
             />
             {error ? <p className="login-error">{error}</p> : null}
             <button type="submit" className="login-submit" disabled={busy}>
-              {busy ? "Sending…" : "Send code"}
+              {busy ? "Sending..." : "Send code"}
             </button>
           </form>
         </>
@@ -149,7 +149,7 @@ export function LoginPanel({ onClose }: Props) {
             />
             {error ? <p className="login-error">{error}</p> : null}
             <button type="submit" className="login-submit" disabled={busy}>
-              {busy ? "Verifying…" : "Verify & continue"}
+              {busy ? "Verifying..." : "Verify & continue"}
             </button>
           </form>
           <button

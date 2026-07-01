@@ -1,0 +1,132 @@
+# Lotus Pet Spa Mobile — second look / orientation prompt
+
+Use this prompt to orient yourself (or another agent) before reviewing or continuing work on Lotus Pet Spa Mobile Grooming, LLC (Columbus, GA).
+
+---
+
+## What this project is
+
+Luxury mobile dog grooming demo site for **April** / **Lotus Pet Spa Mobile Grooming, LLC**. Owner has domain `lotuspetspamobile.com` (parked) but no real website. Valetfy builds a preview demo with claim/subscribe flow (like Woof Wash).
+
+**NOT** the Indiana salon at lotuspetspa.com.
+
+---
+
+## Source of truth (owner guide — use ALL content from here)
+
+| File | Path |
+| --- | --- |
+| **Primary guide** | `C:\smallbizpreview\sites\lotus-pet-spa-mobile\assets\guide.txt` |
+| Copy (leads) | `C:\smallbizpreview\leads\lotus-pet-spa-mobile\source\guide.txt` |
+| Copy (valetfy repo) | `C:\valetfy-demo-sites\docs\dispatch\lotus-pet-spa-mobile\guide.txt` |
+
+Contains: full services menu, breed tiers, doodle packages, bath & dry, all add-ons with prices, Lotus Spa Package ($15), amenities, 8 client reviews, hours, phone, Facebook, booking URL.
+
+**Asset drop folder** (logo, hero, review JPGs go here):
+`C:\smallbizpreview\sites\lotus-pet-spa-mobile\assets\`
+
+Review photos referenced in guide but may not be uploaded yet:
+- `17225572942d7deed8afc74fdebddcc1ca4131c8c7.jpg` (Shannon/Charlie)
+- `172255261799bc3c9a659347b69397285cb1776c5e.jpg` (Renardo)
+- `172106073588c5296869a24e15b2e1066e43a8b933.jpg` (Ruth/Pipey)
+- `172082055663728b8dddfe4bd79004b0c3e7e6145a.jpg` (Mary/Candy)
+- `17208120677c52bbbca8bd4afca5b36f7b41c5bf9a.jpg` (Cathy/Lucy)
+- `17199330313db3829d80fd439191224d178e61d4e7.jpg` (Linda)
+- `1718934988c3e41a74bb6a46e19d2b93c026259ad9.jpg` (Dena/Charley)
+
+---
+
+## v0 (design — USE THIS, not the old draft)
+
+| What | Where |
+| --- | --- |
+| **REMAKE chat (current)** | https://v0.dev/chat/oCvU6DKiNdu |
+| Old draft (ignore) | https://v0.dev/chat/jqnya9JVM5s |
+| Remake design brief | `C:\smallbizpreview\leads\lotus-pet-spa-mobile\v0-remake-prompt.txt` |
+| Chat metadata | `C:\smallbizpreview\leads\lotus-pet-spa-mobile\v0-chat-remake.json` |
+| Original v0 prompt | `C:\smallbizpreview\leads\lotus-pet-spa-mobile\v0-prompt.txt` |
+
+**v0 local scaffold** (standalone Next.js, no claim bar):
+`C:\smallbizpreview\sites\lotus-pet-spa-mobile-v0\`
+- `app/page.tsx`, `app/layout.tsx`, `app/globals.css`
+- `components/` (11 sections — may be outdated vs v0 remake)
+- `lib/site.ts`, `lib/images.ts`
+- Run: `npm install && npm run dev`
+
+**Woof Wash v0 reference** (sibling pattern):
+`C:\smallbizpreview\sites\woof-wash-v0\`
+
+---
+
+## smallbizpreview repo (local lead workspace)
+
+Root: `C:\smallbizpreview\`
+
+| Path | Purpose |
+| --- | --- |
+| `sites\lotus-pet-spa-mobile\assets\` | Raw assets + guide.txt |
+| `sites\lotus-pet-spa-mobile-v0\` | v0 export target / local dev |
+| `leads\lotus-pet-spa-mobile\lead.json` | Business facts, URLs, domain status |
+| `leads\lotus-pet-spa-mobile\source\investigation.md` | Domain/parking research |
+| `leads\lotus-pet-spa-mobile\source\guide.txt` | Guide copy |
+| `leads\lotus-pet-spa-mobile\v0-remake-prompt.txt` | Modern redesign brief for v0 |
+| `leads\lotus-pet-spa-mobile\SECOND-LOOK-PROMPT.txt` | This file |
+
+---
+
+## valetfy-demo-sites (production demo + claim/payment)
+
+Root: `C:\valetfy-demo-sites\`
+
+| Path | Purpose |
+| --- | --- |
+| **Live demo URL** | https://lotus-pet-spa-mobile.dev.sites.valetfy.com |
+| **⚠️ Current live site** | BAD placeholder — Woof Wash clone, built before guide. Replace after v0 remake. |
+| `app\t\lotus-pet-spa-mobile\` | Premium route (page, layout, jsonld, css) |
+| `components\lotuspetspa\` | Template components (placeholder — replace from v0) |
+| `lib\lotuspetspa\site.ts` | Business constants |
+| `lib\lotuspetspa\images.ts` | Placeholder Unsplash URLs |
+| `middleware.ts` | Slug `lotus-pet-spa-mobile` in CUSTOM_TEMPLATE_SLUGS |
+| `scripts\seedData.ts` | Firestore tenant `lotus-pet-spa-mobile` (paid, Network Solutions) |
+| `docs\dispatch\lotus-pet-spa-mobile\` | guide.txt, v0-remake-prompt.txt, v0-chat-remake.json, README.md |
+| `.firecrawl\lotus-pet-spa-mobile-investigation.md` | Lead research |
+
+**Shared infra (same as Woof Wash / Scott):**
+- Stripe claim: `STRIPE_DEMO_SITES_*` env vars, `components/ClaimBar.tsx`, `/api/claim/checkout`
+- Firestore: `demoSites/lotus-pet-spa-mobile`
+- Vercel: one project, wildcard `*.dev.sites.valetfy.com`
+
+**Woof Wash reference** (good finished example):
+- `app\t\woof-wash\`, `components\woofwash\`, https://woof-wash.dev.sites.valetfy.com
+
+---
+
+## Key business facts (quick ref)
+
+| Field | Value |
+| --- | --- |
+| Legal name | Lotus Pet Spa Mobile Grooming, LLC |
+| Owner | April — master groomer |
+| Phone | (706) 801-6787 |
+| Booking | https://booking.moego.pet/ol/LotusPetSpaMobileGroomingLLC/book |
+| Facebook | https://www.facebook.com/people/Lotus-Pet-Spa-Mobile-Grooming/61560653240173/ |
+| Domain | https://lotuspetspamobile.com (parked — Network Solutions, expires 2026-07-14) |
+| Hours | Mon–Fri 8:00–4:30, Sat 8:00–2:30, Sun closed |
+| Slug | `lotus-pet-spa-mobile` |
+
+---
+
+## Second look checklist
+
+1. [ ] Read `guide.txt` end-to-end — confirm every service, price, review, hour is represented
+2. [ ] Open v0 remake: https://v0.dev/chat/oCvU6DKiNdu — compare design to brief (modern, rounded, spa luxury)
+3. [ ] Ignore live demo placeholder until v0 export lands
+4. [ ] Check `assets/` for missing review JPGs and logo/hero
+5. [ ] When v0 is approved → export to `lotus-pet-spa-mobile-v0` → sync to `valetfy-demo-sites/components/lotuspetspa/` → redeploy
+6. [ ] Test claim bar + phone auth on subdomain after redeploy
+
+---
+
+## Task prompt (paste to v0 or agent)
+
+Review Lotus Pet Spa Mobile Grooming website work. Source of truth is `C:\smallbizpreview\sites\lotus-pet-spa-mobile\assets\guide.txt` — every service, add-on price, review, and hour must appear on the site. Current v0 remake is at https://v0.dev/chat/oCvU6DKiNdu (design brief in `v0-remake-prompt.txt`). The live demo at lotus-pet-spa-mobile.dev.sites.valetfy.com is an outdated Woof Wash clone — do not treat it as canonical. Goal: modern 2026 spa aesthetic (rounded cards, soft gradients, pill CTAs), mobile-first, MoeGo booking links, all 8 testimonials, full pricing accordion. After approval, export to `C:\smallbizpreview\sites\lotus-pet-spa-mobile-v0\` then port to `C:\valetfy-demo-sites\components\lotuspetspa\` for Valetfy claim flow.
