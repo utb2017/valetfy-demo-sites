@@ -1,0 +1,35 @@
+{
+  "name": "Lotus Pet Spa Mobile Grooming",
+  "short_name": "Lotus Pet Spa",
+  "description": "Luxury one-on-one mobile dog grooming by April in Columbus, Muscogee County, Phenix City, and the Fort Benning corridor.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#4A3B6B",
+  "theme_color": "#4A3B6B",
+  "icons": [
+    {
+      "src": "/lotus-pet-spa-mobile/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/lotus-pet-spa-mobile/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/lotus-pet-spa-mobile/maskable-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/lotus-pet-spa-mobile/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
