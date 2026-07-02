@@ -8,16 +8,17 @@ export function composeWelcomeEmail(input: {
   const connectUrl = demoSiteConnectUrl(input.slug);
 
   return {
-    subject: `You're in — connect your domain for ${input.businessName}`,
-    textBody: `Thanks for claiming ${input.businessName} on Valetfy.
+    subject: "Your Valetfy demo site",
+    textBody: `Your demo site is ready.
 
-Your demo site: ${siteUrl}
+${input.businessName}
+${siteUrl}
 
-Next step — connect your custom domain (DNS instructions are unlocked):
+Next step — connect your custom domain. DNS instructions unlock after claim:
 
 ${connectUrl}
 
-Sign in with the same Valetfy account you used at checkout. If you need to manage billing, use the link on that page.
+Sign in with the same Valetfy account you used at checkout.
 
 — Valetfy`,
   };

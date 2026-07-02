@@ -1,5 +1,10 @@
 const DEFAULT_BASE_DOMAIN = "dev.sites.valetfy.com";
 
+const CUSTOM_DOMAIN_SLUGS: Record<string, string> = {
+  "lotuspetspamobile.com": "lotus-pet-spa-mobile",
+  "www.lotuspetspamobile.com": "lotus-pet-spa-mobile",
+};
+
 function normalizeHost(host: string): string {
   return host.split(":")[0].trim().toLowerCase();
 }
@@ -21,6 +26,8 @@ export function resolveSlugFromHost(hostHeader: string | null): string | null {
 
   const host = normalizeHost(hostHeader);
   const baseDomain = getDemoSitesBaseDomain();
+  const customDomainSlug = CUSTOM_DOMAIN_SLUGS[host];
+  if (customDomainSlug) return customDomainSlug;
 
   if (host === baseDomain) return null;
 

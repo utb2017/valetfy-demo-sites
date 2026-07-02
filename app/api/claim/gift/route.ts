@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { verifyBearerToken } from "@/lib/firebaseAuthServer";
 import { claimGiftSite } from "@/lib/demoSiteSubscription";
 import { getDemoSiteBySlug } from "@/lib/getDemoSite";
+import { sendClaimCompletedEmails } from "@/lib/claimEmails";
 import { isGiftMonetization } from "@/lib/monetization";
 
 export const runtime = "nodejs";
@@ -54,5 +55,16 @@ export async function POST(request: Request) {
 
   await claimGiftSite(siteId, user.uid);
 
-  return NextResponse.json({ ok: true, redirect: "/connect" });
+  const emailResult = await sendClaimCompletedEmails({
+    siteId,
+    customerEmail: user.email,
+    claimType: "gift",
+  });
+
+  return NextResponse.json({
+    ok: true,
+    redirect: "/connect",
+    emailWarnings:
+      emailResult.warnings.length > 0 ? emailResult.warnings : undefined,
+  });
 }

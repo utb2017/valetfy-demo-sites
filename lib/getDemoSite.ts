@@ -41,11 +41,16 @@ function asDemoSitePublic(
 export async function getDemoSiteBySlug(
   slug: string
 ): Promise<DemoSitePublic | null> {
-  assertDevFirebaseProject();
-  const db = getAdminDb();
-  const snap = await db.collection("demoSites").doc(slug).get();
-  if (!snap.exists) return null;
-  return asDemoSitePublic(snap.id, snap.data() as DemoSiteDoc);
+  try {
+    assertDevFirebaseProject();
+    const db = getAdminDb();
+    const snap = await db.collection("demoSites").doc(slug).get();
+    if (!snap.exists) return null;
+    return asDemoSitePublic(snap.id, snap.data() as DemoSiteDoc);
+  } catch (err) {
+    console.error(`[getDemoSiteBySlug] ${slug}:`, err);
+    return null;
+  }
 }
 
 export async function getDemoSiteByCustomDomain(

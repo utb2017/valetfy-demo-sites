@@ -1,23 +1,54 @@
 const DEFAULT_TEST_RECIPIENT = "bear@valetfy.com";
 
 export function realRecipientsEnabled(): boolean {
-  const v = process.env.DEMO_SITES_EMAIL_ENABLE_REAL_RECIPIENTS?.trim().toLowerCase();
+  const v =
+    process.env.DEMO_SITES_EMAIL_ENABLE_REAL_RECIPIENTS?.trim().toLowerCase();
   return v === "1" || v === "true" || v === "yes";
 }
 
 export function getTestEmailRecipient(): string {
-  return (
-    process.env.DEMO_SITES_EMAIL_TEST_RECIPIENT?.trim() || DEFAULT_TEST_RECIPIENT
-  );
+  const v = process.env.DEMO_SITES_EMAIL_TEST_RECIPIENT?.trim();
+  if (!v) {
+    throw new Error("DEMO_SITES_EMAIL_TEST_RECIPIENT is not configured");
+  }
+  return v;
 }
 
 export function getPostmarkSenderEmail(): string {
-  return process.env.DEMO_SITES_EMAIL_SENDER?.trim() || "bear@valetfy.com";
+  const v = process.env.DEMO_SITES_EMAIL_SENDER?.trim();
+  if (!v) {
+    throw new Error("DEMO_SITES_EMAIL_SENDER is not configured");
+  }
+  return v;
+}
+
+export function getPostmarkServerToken(): string {
+  const v = process.env.POSTMARK_SERVER_TOKEN?.trim();
+  if (!v) {
+    throw new Error("POSTMARK_SERVER_TOKEN is not configured");
+  }
+  return v;
+}
+
+export type EmailEnv = {
+  token: string;
+  sender: string;
+  testRecipient: string;
+  realRecipientsEnabled: boolean;
+};
+
+export function getEmailEnv(): EmailEnv {
+  return {
+    token: getPostmarkServerToken(),
+    sender: getPostmarkSenderEmail(),
+    testRecipient: getTestEmailRecipient(),
+    realRecipientsEnabled: realRecipientsEnabled(),
+  };
 }
 
 /**
  * Dev safety: unless DEMO_SITES_EMAIL_ENABLE_REAL_RECIPIENTS is set,
- * all outbound mail goes to the test inbox.
+ * customer mail goes to the test inbox.
  */
 export function resolveOutboundRecipient(intendedTo?: string | null): {
   to: string;
@@ -35,7 +66,10 @@ export function resolveOutboundRecipient(intendedTo?: string | null): {
   };
 }
 
-export function withDevSubjectPrefix(subject: string, devRouted: boolean): string {
+export function withDevSubjectPrefix(
+  subject: string,
+  devRouted: boolean
+): string {
   if (!devRouted) return subject;
   return subject.startsWith("[DEV]") ? subject : `[DEV] ${subject}`;
 }

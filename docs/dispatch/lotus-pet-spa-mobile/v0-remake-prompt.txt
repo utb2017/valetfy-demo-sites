@@ -1,0 +1,48 @@
+REMAKE FROM SCRATCH — discard any existing draft. Build a premium, MODERN mobile dog grooming website for Lotus Pet Spa Mobile Grooming, LLC (Columbus, GA). Next.js App Router + Tailwind + shadcn/ui. Single-page marketing site. Finished quality, not a wireframe.
+
+## DESIGN (critical — previous draft looked dated)
+- **Modern 2026 aesthetic**: soft rounded-2xl/3xl cards, generous whitespace, subtle gradients, glass/blur accents where tasteful
+- **Typography**: clean sans (Inter or similar), large confident headlines, readable body
+- **Feel**: luxury mobile spa — calm, warm, trustworthy — NOT corporate, NOT 2010 template
+- **UI**: pill buttons (rounded-full), floating review cards, icon chips, smooth section transitions
+- **Palette suggestion** (refine as needed): deep lotus plum #4A3B6B, soft lavender surface #F3EFF8, sage/teal accent #6BB5A8, warm gold CTA #C9A66B — ensure WCAG AA contrast
+- **Mobile-first** sticky header + bottom book bar on small screens
+- Lighthouse 95+ target; next/image; semantic HTML; JSON-LD PetGroomer
+
+## BUSINESS (use exactly)
+- **Name:** Lotus Pet Spa Mobile Grooming, LLC
+- **Owner:** April — master groomer, patient, professional (see reviews)
+- **Phone:** (706) 801-6787 — tel:+17068016787, sms:+17068016787
+- **Website:** https://www.lotuspetspamobile.com
+- **Booking (all Book buttons, new tab):** https://booking.moego.pet/ol/LotusPetSpaMobileGroomingLLC/book
+- **Facebook:** https://www.facebook.com/people/Lotus-Pet-Spa-Mobile-Grooming/61560653240173/
+- **Service area:** Columbus, GA / Muscogee County / Phenix City / Fort Benning corridor — mobile, we come to you
+- **Features:** Cage-free, locally owned, accepts walk-ins, accepts credit cards / Apple Pay / Android Pay
+
+## HOURS (exact)
+- Mon–Fri: 8:00 AM – 4:30 PM
+- Saturday: 8:00 AM – 2:30 PM
+- Sunday: Closed
+
+## PAGE SECTIONS (in order)
+1. **Sticky header** — logo area, nav (Services, Reviews, About, Contact), phone, rounded gold/plum "Book Now"
+2. **Hero** — strong headline about luxury mobile spa grooming at your door; subline about April & one-on-one care; Book + Call CTAs; hero image placeholder (rounded card)
+3. **Trust strip** — Cage-free · Locally owned · Eco-friendly products · We come to you
+4. **Services & pricing** — organize ALL services from guide.txt (Full Groom by breed size, Mini Groom, Doodle packages, Bath & Dry, add-ons, Lotus Spa Package $15, etc.). Use accordion or tabbed cards so the long menu is scannable. Include every price listed in the guide.
+5. **Lotus Spa Package highlight** — callout card: Blueberry Facial, teeth brushing, paw & nose cream ($15)
+6. **Add-ons grid** — all add-ons with prices from guide (Paw Pads $10, Vital Mask $10, Shed Less $30, Flea/Tick $15, De-matting from $10, etc.)
+7. **Reviews** — all 8 testimonials from guide with star ratings (use placeholder avatar circles if no photos): Shannon/Charlie, Renardo, Ruth/Pipey, Mary/Candy, Cathy/Lucy, Linda, Dena/Charley
+8. **About April** — warm copy from review themes: attention to detail, patient, kind, professional
+9. **Contact** — hours card, phone, Facebook link, MoeGo book link; optional simple contact form → https://formsubmit.co/bear@valetfy.com
+10. **Footer** — business name, hours, phone, Facebook, subtle "Powered by Valetfy" link to https://valetfy.com
+
+## SOURCE OF TRUTH
+The attached file **guide.txt** contains the complete services menu, add-on descriptions, amenities, reviews, hours, and contact info. **Use every service, price, and review from that file.** Do not invent pricing.
+
+## DO NOT
+- Copy Woof Wash or any Austin TX branding
+- Use flat, boxy, outdated Bootstrap-style layout
+- Skip services or reviews from the guide
+- Build a custom booking flow (MoeGo only)
+
+Deliver a beautiful, modern, rounded, spa-luxury site that April would be proud to send customers to.
