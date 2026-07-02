@@ -16,9 +16,9 @@ function safeStr(v: unknown): string {
 
 export function assertStripeTestMode(): string {
   const key = safeStr(process.env.STRIPE_SECRET_KEY);
-  if (!key.startsWith("sk_test_")) {
+  if (!key.startsWith("sk_test_") && !key.startsWith("sk_live_")) {
     throw new Error(
-      "Refusing demo-sites Stripe call: STRIPE_SECRET_KEY must be sk_test_*."
+      "Refusing demo-sites Stripe call: STRIPE_SECRET_KEY must be sk_test_* or sk_live_*."
     );
   }
   return key;
